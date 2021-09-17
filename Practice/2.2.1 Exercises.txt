@@ -1,0 +1,54 @@
+Examples of Expressions
+
+expr:
+Int 5
+Add(Int 2, Int 3)
+parse "2+3"
+
+env:
+ExtendEnv("x", NumVal 2, EmptyEnv)
+EmptyEnv
+extend_env "x" (NumVal 3) EmptyEnv
+
+exp_val:
+NumVal 3
+BoolVal true
+ProcVal("x", Add(Int 3, Var "x"), EmptyEnv)
+PairVal(NumVal 2, BoolVal true)
+
+exp_val result:
+Ok (NumVal 2)
+Ok (ProcVal("x", Add(Int 3, Var "x"), EmptyEnv)
+Ok (PairVal(NumVal 2, BoolVal true))
+eval_expre (Int 5) EmptyEnv
+apply_env "x" (ExtendEnv("x", NumVal 3, EmptyEnv))
+Error "nope" (has type 'a result)
+
+int result:
+Ok 2
+Ok (3+4)
+
+env result:
+Ok EmptyEnv
+Ok (ExtendEnv("x", NumVal 2, EmptyEnv))
+Ok (extend_env "x" (NumVal 3) EmptyEnv)
+lookup_env EmptyEnv
+extend_env "x" (NumVal 3) EmptyEnv
+return EmptyEnv EmptyEnv
+lookup_env >>= fun en -> return en
+
+int ea_result:
+result 5
+return 5 >>= fun n -> return n+1
+int_of_numVal (NumVal 3)
+
+exp_val ea_result:
+return (BoolVal true)
+return (NumVal(n+1))
+apply_env "x"
+
+env ea_result:
+return EmptyEnv
+lookup_env
+extend_env "x" (NumVal 3)
+empty_env
